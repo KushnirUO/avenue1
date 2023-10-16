@@ -18,12 +18,7 @@ function MenuBurger() {
         $('.burger-close').toggle();
     })
 }
-
-$(document).ready(function(){
-    let copy;
-    $('.viewbox').each(function (){
-        copy = $(this).clone();
-    })
+function initSlider(){
     var swiper = new Swiper(".mySwiper", {
         navigation: {
             nextEl: ".swiper-button-next-main",
@@ -32,9 +27,10 @@ $(document).ready(function(){
     });
     var swiper = new Swiper(".slider-filter", {
         slidesPerView: 4,
+        spaceBetween: 30,
         navigation: {
-            nextEl: ".swiper-button-next-main",
-            prevEl: ".swiper-button-prev-main",
+            nextEl: ".swiper-button-next-filter",
+            prevEl: ".swiper-button-prev-filter",
         },
     });
 
@@ -57,6 +53,29 @@ $(document).ready(function(){
             },
         }
     });
+}
+
+$(document).ready(function(){
+    let copy;
+    $('.viewbox').each(function (){
+        copy = $(this).clone();
+    })
+        $("#openModalBtn").click(function() {
+            $.fancybox.open({
+                src: '#modalContent',
+                type: 'inline',
+                opts: {
+                    afterShow: function(instance, current) {
+                        console.info('Модальное окно открыто');
+                    },
+                    afterClose: function(instance, current) {
+                        console.info('Модальное окно закрыто');
+                    }
+                }
+            });
+        });
+     initSlider();
+
     $(window).on('scroll', function() {
         yPos = window.pageYOffset;
         shift = yPos * 0.8 + 'px';
